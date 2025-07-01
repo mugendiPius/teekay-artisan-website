@@ -1,10 +1,10 @@
-
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Camera, Video, Palette, Instagram, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Camera, Video, Palette, Instagram, Facebook, Youtube, Mail, Phone, MapPin, Scissors, Hammer } from 'lucide-react';
+import TypingAnimation from '@/components/TypingAnimation';
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -83,18 +83,18 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-cream font-lato">
+    <div className="min-h-screen bg-parchment font-lato">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-cream/90 backdrop-blur-sm z-50 border-b border-sage/20">
+      <nav className="fixed top-0 w-full bg-parchment/95 backdrop-blur-sm z-50 border-b border-sage-leaf/20">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-pacifico text-terracotta">Teekay</h1>
+            <h1 className="text-2xl font-pacifico text-clay-pot">Teekay</h1>
             <div className="hidden md:flex space-x-8">
-              <a href="#home" className="text-olive hover:text-terracotta transition-colors">Home</a>
-              <a href="#about" className="text-olive hover:text-terracotta transition-colors">About</a>
-              <a href="#portfolio" className="text-olive hover:text-terracotta transition-colors">Portfolio</a>
-              <a href="#testimonials" className="text-olive hover:text-terracotta transition-colors">Testimonials</a>
-              <a href="#contact" className="text-olive hover:text-terracotta transition-colors">Contact</a>
+              <a href="#home" className="text-forest-green hover:text-clay-pot transition-colors">Home</a>
+              <a href="#about" className="text-forest-green hover:text-clay-pot transition-colors">About</a>
+              <a href="#portfolio" className="text-forest-green hover:text-clay-pot transition-colors">Portfolio</a>
+              <a href="#testimonials" className="text-forest-green hover:text-clay-pot transition-colors">Testimonials</a>
+              <a href="#contact" className="text-forest-green hover:text-clay-pot transition-colors">Contact</a>
             </div>
           </div>
         </div>
@@ -102,35 +102,117 @@ const Index = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background with texture overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1721322800607-8c38375eef04?auto=format&fit=crop&w=1920&q=80)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1920&q=80)',
           }}
         >
-          <div className="absolute inset-0 bg-sage/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-weathered-wood/40 via-hemp/30 to-sage-leaf/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-parchment/20 via-transparent to-linen/20"></div>
         </div>
-        <div className="relative z-10 text-center px-4 animate-fade-in">
-          <h1 className="text-6xl md:text-8xl font-pacifico text-cream mb-6 drop-shadow-lg">
-            Teekay
-          </h1>
-          <p className="text-xl md:text-2xl text-cream mb-8 max-w-2xl mx-auto drop-shadow-md">
-            Crafting Stories in Every Thread & Frame
+        
+        {/* Floating craft elements */}
+        <div className="absolute top-20 left-10 animate-float">
+          <Scissors className="w-8 h-8 text-antique-brass/60" style={{ animationDelay: '0s' }} />
+        </div>
+        <div className="absolute top-32 right-16 animate-float">
+          <Palette className="w-6 h-6 text-clay-pot/60" style={{ animationDelay: '1s' }} />
+        </div>
+        <div className="absolute bottom-32 left-20 animate-float">
+          <Hammer className="w-7 h-7 text-rust/60" style={{ animationDelay: '2s' }} />
+        </div>
+        
+        {/* Main content */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          {/* Decorative elements */}
+          <div className="mb-8 flex justify-center items-center space-x-4">
+            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-antique-brass"></div>
+            <div className="w-2 h-2 bg-clay-pot rounded-full"></div>
+            <div className="w-8 h-0.5 bg-antique-brass"></div>
+            <div className="w-2 h-2 bg-sage-leaf rounded-full"></div>
+            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-antique-brass"></div>
+          </div>
+          
+          {/* Main heading with crafty styling */}
+          <div className="mb-6">
+            <h1 className="text-6xl md:text-8xl font-pacifico text-charcoal mb-2 drop-shadow-lg relative">
+              <span className="relative">
+                Teekay
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-clay-pot via-antique-brass to-rust rounded-full"></div>
+              </span>
+            </h1>
+            <div className="text-sm md:text-base text-weathered-wood font-medium tracking-widest uppercase mb-4">
+              Artisan • Craftsman • Storyteller
+            </div>
+          </div>
+
+          {/* Typing animation tagline */}
+          <div className="mb-8 h-16 flex items-center justify-center">
+            <TypingAnimation 
+              text="Crafting Stories in Every Thread & Frame"
+              className="text-xl md:text-3xl text-charcoal font-medium drop-shadow-md"
+              delay={1000}
+              speed={80}
+            />
+          </div>
+
+          {/* Descriptive text */}
+          <p className="text-lg md:text-xl text-forest-green mb-8 max-w-2xl mx-auto leading-relaxed font-light">
+            Where traditional craftsmanship meets modern artistry. Each piece tells a story, 
+            every moment captures a memory.
           </p>
-          <Button 
-            className="bg-terracotta hover:bg-clay text-cream px-8 py-3 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-            onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Explore My Work
-          </Button>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              className="bg-clay-pot hover:bg-rust text-linen px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-transparent hover:border-antique-brass"
+              onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Explore My Craft
+            </Button>
+            <Button 
+              variant="outline"
+              className="border-2 border-clay-pot text-clay-pot hover:bg-clay-pot hover:text-linen px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Commission a Piece
+            </Button>
+          </div>
+
+          {/* Decorative bottom elements */}
+          <div className="mt-12 flex justify-center items-center space-x-6">
+            <div className="flex items-center space-x-2 text-weathered-wood">
+              <div className="w-3 h-3 border border-clay-pot rounded-full"></div>
+              <span className="text-sm font-medium">Handcrafted</span>
+            </div>
+            <div className="w-px h-4 bg-sage-leaf"></div>
+            <div className="flex items-center space-x-2 text-weathered-wood">
+              <div className="w-3 h-3 border border-sage-leaf rounded-full"></div>
+              <span className="text-sm font-medium">Authentic</span>
+            </div>
+            <div className="w-px h-4 bg-clay-pot"></div>
+            <div className="flex items-center space-x-2 text-weathered-wood">
+              <div className="w-3 h-3 border border-antique-brass rounded-full"></div>
+              <span className="text-sm font-medium">Unique</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-clay-pot rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-clay-pot rounded-full mt-2 animate-pulse"></div>
+          </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-sand">
+      <section id="about" className="py-20 bg-linen">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-pacifico text-terracotta text-center mb-12 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-12 animate-fade-in">
               About Me
             </h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -138,35 +220,35 @@ const Index = () => {
                 <img 
                   src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?auto=format&fit=crop&w=600&q=80"
                   alt="Teekay Portrait"
-                  className="rounded-lg shadow-lg w-full h-96 object-cover"
+                  className="rounded-lg shadow-lg w-full h-96 object-cover border-4 border-sage-leaf/20"
                 />
               </div>
               <div className="animate-fade-in">
-                <p className="text-lg text-olive mb-6 leading-relaxed">
+                <p className="text-lg text-forest-green mb-6 leading-relaxed">
                   Hello! I'm Teekay, a passionate artist and craftsman who finds joy in creating beautiful, 
                   handcrafted bracelets and capturing life's most precious moments through photography and video.
                 </p>
-                <p className="text-lg text-olive mb-6 leading-relaxed">
+                <p className="text-lg text-forest-green mb-6 leading-relaxed">
                   My journey began with a simple love for working with my hands and creating something meaningful. 
                   Each bracelet I craft tells a story, and every photograph I take preserves a memory that will last forever.
                 </p>
-                <p className="text-lg text-olive leading-relaxed">
+                <p className="text-lg text-forest-green leading-relaxed">
                   Whether I'm weaving intricate patterns into jewelry or editing cinematic videos, 
                   I pour my heart into every project, ensuring that each piece reflects the beauty and 
                   authenticity that makes life truly special.
                 </p>
                 <div className="flex space-x-6 mt-8">
                   <div className="text-center">
-                    <Palette className="w-8 h-8 text-terracotta mx-auto mb-2" />
-                    <span className="text-sm text-olive font-medium">Bracelet Design</span>
+                    <Palette className="w-8 h-8 text-clay-pot mx-auto mb-2" />
+                    <span className="text-sm text-forest-green font-medium">Bracelet Design</span>
                   </div>
                   <div className="text-center">
-                    <Camera className="w-8 h-8 text-terracotta mx-auto mb-2" />
-                    <span className="text-sm text-olive font-medium">Photography</span>
+                    <Camera className="w-8 h-8 text-clay-pot mx-auto mb-2" />
+                    <span className="text-sm text-forest-green font-medium">Photography</span>
                   </div>
                   <div className="text-center">
-                    <Video className="w-8 h-8 text-terracotta mx-auto mb-2" />
-                    <span className="text-sm text-olive font-medium">Video Editing</span>
+                    <Video className="w-8 h-8 text-clay-pot mx-auto mb-2" />
+                    <span className="text-sm text-forest-green font-medium">Video Editing</span>
                   </div>
                 </div>
               </div>

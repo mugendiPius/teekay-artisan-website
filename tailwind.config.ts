@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -23,15 +24,19 @@ export default {
 				'lato': ['Lato', 'sans-serif'],
 			},
 			colors: {
-				// Custom color palette for Teekay's portfolio
-				'sand': '#F5F1E8',
-				'cream': '#FDF8F0',
-				'terracotta': '#D2691E',
-				'clay': '#C65D07',
-				'sage': '#9CAF88',
-				'olive': '#8B9A5B',
-				'muted-gold': '#D4AF37',
-				'warm-gold': '#F4E4BC',
+				// Enhanced crafty color palette
+				'parchment': '#F7F3E9',
+				'linen': '#FAF0E6',
+				'clay-pot': '#B85450',
+				'rust': '#B7472A',
+				'sage-leaf': '#87A96B',
+				'forest-green': '#6B8E5A',
+				'antique-brass': '#CD7F32',
+				'warm-amber': '#FFBF00',
+				'weathered-wood': '#8B7355',
+				'dusty-rose': '#D4A5A5',
+				'hemp': '#A0956D',
+				'charcoal': '#36454F',
 				
 				// Keeping the existing shadcn colors
 				border: 'hsl(var(--border))',
@@ -119,13 +124,39 @@ export default {
 						opacity: '1',
 						transform: 'translateX(0)'
 					}
+				},
+				'typing': {
+					'from': {
+						width: '0'
+					},
+					'to': {
+						width: '100%'
+					}
+				},
+				'blink': {
+					'from, to': {
+						'border-color': 'transparent'
+					},
+					'50%': {
+						'border-color': 'currentColor'
+					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
-				'slide-in': 'slide-in 0.6s ease-out'
+				'slide-in': 'slide-in 0.6s ease-out',
+				'typing': 'typing 3.5s steps(40, end), blink 0.75s step-end infinite',
+				'float': 'float 3s ease-in-out infinite'
 			}
 		}
 	},
