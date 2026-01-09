@@ -1,13 +1,23 @@
-
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Play } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
+import AnimatedSection from '@/components/AnimatedSection';
+
+// Import Kenyan portfolio images
+import photoMaasai from '@/assets/portfolio-photo-1.jpg';
+import photoElephants from '@/assets/portfolio-photo-2.jpg';
+import photoPortrait from '@/assets/portfolio-photo-3.jpg';
+import videoFisherman from '@/assets/portfolio-video-1.jpg';
+import videoWedding from '@/assets/portfolio-video-2.jpg';
+import bracelet1 from '@/assets/portfolio-bracelet-1.jpg';
+import bracelet2 from '@/assets/portfolio-bracelet-2.jpg';
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -24,65 +34,93 @@ const Index = () => {
   const portfolioItems = [
     {
       id: 1,
-      title: "Handwoven Bracelet Collection",
-      category: "Bracelets",
-      image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=80",
-      description: "Artisan-crafted bracelets using traditional techniques"
+      title: "Maasai Warriors at Sunset",
+      category: "Photography",
+      image: photoMaasai,
+      description: "Traditional Maasai culture captured in the golden savanna light"
     },
     {
       id: 2,
-      title: "Portrait Photography",
-      category: "Photography",
-      image: "https://images.unsplash.com/photo-1494790108755-2616c0763096?auto=format&fit=crop&w=800&q=80",
-      description: "Capturing authentic moments and emotions"
+      title: "Lake Victoria Sunrise",
+      category: "Video",
+      image: videoFisherman,
+      description: "Documentary cinematography of Kenyan fishing communities",
+      isVideo: true
     },
     {
       id: 3,
-      title: "Nature Documentary",
-      category: "Video",
-      image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
-      description: "Cinematic storytelling through video"
+      title: "Traditional Beaded Bracelets",
+      category: "Bracelets",
+      image: bracelet1,
+      description: "Handcrafted Maasai-inspired beadwork"
     },
     {
       id: 4,
-      title: "Leather & Bead Designs",
-      category: "Bracelets",
-      image: "https://images.unsplash.com/photo-1603561596112-6a132309c76e?auto=format&fit=crop&w=800&q=80",
-      description: "Combining natural materials with modern aesthetics"
+      title: "Amboseli Elephants",
+      category: "Photography",
+      image: photoElephants,
+      description: "Wildlife photography with Mount Kilimanjaro backdrop"
     },
     {
       id: 5,
-      title: "Street Photography",
-      category: "Photography",
-      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=80",
-      description: "Urban life through an artistic lens"
+      title: "Kenyan Wedding Celebration",
+      category: "Video",
+      image: videoWedding,
+      description: "Capturing joyful moments of traditional celebrations",
+      isVideo: true
     },
     {
       id: 6,
-      title: "Brand Video Content",
-      category: "Video",
-      image: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&w=800&q=80",
-      description: "Professional video content for brands"
+      title: "Colorful Anklet Collection",
+      category: "Bracelets",
+      image: bracelet2,
+      description: "Vibrant geometric patterns in traditional style"
+    },
+    {
+      id: 7,
+      title: "Nairobi Street Portrait",
+      category: "Photography",
+      image: photoPortrait,
+      description: "Authentic portraits celebrating African beauty"
     }
   ];
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Amina Wanjiku",
       text: "Teekay's bracelets are absolutely stunning! The attention to detail and craftsmanship is incredible.",
       rating: 5
     },
     {
-      name: "Michael Chen",
+      name: "David Ochieng",
       text: "The photography session was amazing. Teekay captured moments I'll treasure forever.",
       rating: 5
     },
     {
-      name: "Emma Rodriguez",
+      name: "Grace Njeri",
       text: "Professional video editing with an artistic touch. Exceeded all my expectations!",
       rating: 5
     }
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" as const }
+    }
+  };
 
   return (
     <div className="min-h-screen bg-parchment font-lato">
@@ -93,73 +131,96 @@ const Index = () => {
       {/* Portfolio Section */}
       <section id="portfolio" className="py-12 sm:py-16 md:py-20 bg-cream">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12 animate-fade-in">
-            My Portfolio
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {portfolioItems.map((item, index) => (
-              <Card 
-                key={item.id} 
-                className="group overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 animate-fade-in bg-white"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-xs sm:text-sm font-medium bg-clay-pot px-2 py-1 rounded-full">
-                      {item.category}
-                    </span>
+          <AnimatedSection>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12">
+              My Portfolio
+            </h2>
+          </AnimatedSection>
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
+            {portfolioItems.map((item) => (
+              <motion.div key={item.id} variants={itemVariants}>
+                <Card 
+                  className="group overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 bg-white h-full"
+                >
+                  <div className="relative overflow-hidden">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    {item.isVideo && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-linen/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <Play className="w-5 h-5 sm:w-6 sm:h-6 text-clay-pot ml-1" fill="currentColor" />
+                        </div>
+                      </div>
+                    )}
+                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="text-xs sm:text-sm font-medium bg-clay-pot px-2 py-1 rounded-full">
+                        {item.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-semibold text-forest-green mb-2">{item.title}</h3>
-                  <p className="text-sm sm:text-base text-sage-leaf">{item.description}</p>
-                </div>
-              </Card>
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-semibold text-forest-green mb-2">{item.title}</h3>
+                    <p className="text-sm sm:text-base text-sage-leaf">{item.description}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonials Section */}
       <section id="testimonials" className="py-12 sm:py-16 md:py-20 bg-warm-amber/20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12 animate-fade-in">
-            What Clients Say
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
+          <AnimatedSection>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12">
+              What Clients Say
+            </h2>
+          </AnimatedSection>
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {testimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
-                className="p-4 sm:p-6 text-center shadow-lg bg-linen animate-fade-in"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="flex justify-center mb-3 sm:mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-warm-amber text-lg sm:text-xl">★</span>
-                  ))}
-                </div>
-                <p className="text-sm sm:text-base text-forest-green mb-3 sm:mb-4 italic">"{testimonial.text}"</p>
-                <p className="font-semibold text-clay-pot text-sm sm:text-base">- {testimonial.name}</p>
-              </Card>
+              <motion.div key={index} variants={itemVariants}>
+                <Card className="p-4 sm:p-6 text-center shadow-lg bg-linen h-full">
+                  <div className="flex justify-center mb-3 sm:mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <span key={i} className="text-warm-amber text-lg sm:text-xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-sm sm:text-base text-forest-green mb-3 sm:mb-4 italic">"{testimonial.text}"</p>
+                  <p className="font-semibold text-clay-pot text-sm sm:text-base">- {testimonial.name}</p>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-12 sm:py-16 md:py-20 bg-parchment">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12 animate-fade-in">
-            Get In Touch
-          </h2>
+          <AnimatedSection>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-pacifico text-clay-pot text-center mb-8 sm:mb-12">
+              Get In Touch
+            </h2>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 max-w-6xl mx-auto">
-            <div className="animate-slide-in">
+            <AnimatedSection delay={0.1}>
               <h3 className="text-xl sm:text-2xl font-semibold text-forest-green mb-4 sm:mb-6">Let's Create Something Beautiful</h3>
               <p className="text-sm sm:text-base text-forest-green mb-6 sm:mb-8 leading-relaxed">
                 I'd love to hear about your project! Whether you're looking for custom bracelet designs, 
@@ -190,66 +251,95 @@ const Index = () => {
                   <Youtube className="w-5 h-5 sm:w-6 sm:h-6" />
                 </a>
               </div>
-            </div>
-            <Card className="p-5 sm:p-6 md:p-8 shadow-lg bg-linen animate-fade-in">
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-forest-green mb-2">Name</label>
-                  <Input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full border-sage-leaf/30 focus:border-clay-pot"
-                    placeholder="Your Name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-forest-green mb-2">Email</label>
-                  <Input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    className="w-full border-sage-leaf/30 focus:border-clay-pot"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-forest-green mb-2">Message</label>
-                  <Textarea
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full border-sage-leaf/30 focus:border-clay-pot"
-                    rows={4}
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-clay-pot hover:bg-rust text-linen py-3 font-semibold rounded-full transition-all duration-300"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </Card>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <Card className="p-5 sm:p-6 md:p-8 shadow-lg bg-linen">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-forest-green mb-2">Name</label>
+                    <Input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="w-full border-sage-leaf/30 focus:border-clay-pot"
+                      placeholder="Your Name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-forest-green mb-2">Email</label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="w-full border-sage-leaf/30 focus:border-clay-pot"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-forest-green mb-2">Message</label>
+                    <Textarea
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      className="w-full border-sage-leaf/30 focus:border-clay-pot"
+                      rows={4}
+                      placeholder="Tell me about your project..."
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-clay-pot hover:bg-rust text-linen py-3 font-semibold rounded-full transition-all duration-300"
+                  >
+                    Send Message
+                  </Button>
+                </form>
+              </Card>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <section className="py-10 sm:py-12 md:py-16 bg-clay-pot">
+      <motion.section 
+        className="py-10 sm:py-12 md:py-16 bg-clay-pot"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="container mx-auto px-4 text-center">
-          <h3 className="text-2xl sm:text-3xl font-pacifico text-linen mb-3 sm:mb-4">Ready to Start Your Project?</h3>
-          <p className="text-sm sm:text-base text-linen/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
-            Let's collaborate to create something unique and meaningful.
-          </p>
-          <Button 
-            className="bg-linen text-clay-pot hover:bg-parchment px-6 sm:px-8 py-3 font-semibold rounded-full transition-all duration-300"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          <motion.h3 
+            className="text-2xl sm:text-3xl font-pacifico text-linen mb-3 sm:mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Let's Collaborate
-          </Button>
+            Ready to Start Your Project?
+          </motion.h3>
+          <motion.p 
+            className="text-sm sm:text-base text-linen/90 mb-6 sm:mb-8 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            Let's collaborate to create something unique and meaningful.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Button 
+              className="bg-linen text-clay-pot hover:bg-parchment px-6 sm:px-8 py-3 font-semibold rounded-full transition-all duration-300"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Let's Collaborate
+            </Button>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <footer className="bg-forest-green text-linen py-8 sm:py-10 md:py-12">
