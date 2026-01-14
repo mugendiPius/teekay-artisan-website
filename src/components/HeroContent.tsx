@@ -68,7 +68,10 @@ const HeroContent = () => {
         <Button 
           variant="outline"
           className="w-full sm:w-auto border-2 border-linen text-linen hover:bg-linen hover:text-charcoal px-8 py-4 sm:py-5 text-base font-bold rounded-full transition-all duration-300 bg-charcoal/30 backdrop-blur-sm"
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => {
+            const message = encodeURIComponent("Hello Teekay! I'm interested in working with you. Let's discuss my project.");
+            window.open(`https://wa.me/254798167973?text=${message}`, '_blank');
+          }}
         >
           Work With Me
         </Button>
