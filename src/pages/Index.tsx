@@ -30,7 +30,7 @@ const Index = () => {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2500);
+    const timer = setTimeout(() => setIsLoading(false), 4000);
     return () => clearTimeout(timer);
   }, []);
 
