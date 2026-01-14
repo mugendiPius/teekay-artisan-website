@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Play } from 'lucide-react';
+import { Instagram, Facebook, Youtube, Mail, Phone, MapPin, Play, MessageCircle } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import AnimatedSection from '@/components/AnimatedSection';
+import ServicesSection from '@/components/ServicesSection';
+import LoadingScreen from '@/components/LoadingScreen';
 
 // Import Kenyan portfolio images
 import photoMaasai from '@/assets/portfolio-photo-1.jpg';
@@ -20,15 +22,31 @@ import bracelet1 from '@/assets/portfolio-bracelet-1.jpg';
 import bracelet2 from '@/assets/portfolio-bracelet-2.jpg';
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    const preTypedMessage = `Hello Teekay!
+
+My name is ${formData.name || '[Your Name]'}.
+Email: ${formData.email || '[Your Email]'}
+
+${formData.message || 'I would like to discuss a project with you.'}
+
+Looking forward to hearing from you!`;
+    
+    const encodedMessage = encodeURIComponent(preTypedMessage);
+    window.open(`https://wa.me/254798167973?text=${encodedMessage}`, '_blank');
   };
 
   const portfolioItems = [
@@ -123,10 +141,16 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-parchment font-lato">
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
+      
+      <div className="min-h-screen bg-parchment font-lato">
+        <Navigation />
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-12 sm:py-16 md:py-20 bg-cream">
@@ -254,7 +278,11 @@ const Index = () => {
             </AnimatedSection>
             <AnimatedSection delay={0.2}>
               <Card className="p-5 sm:p-6 md:p-8 shadow-lg bg-linen">
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="flex items-center gap-2 mb-4 text-forest-green">
+                  <MessageCircle className="w-5 h-5 text-green-600" />
+                  <span className="text-sm font-medium">Message via WhatsApp</span>
+                </div>
+                <form onSubmit={handleWhatsAppSubmit} className="space-y-4 sm:space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-forest-green mb-2">Name</label>
                     <Input
@@ -287,9 +315,10 @@ const Index = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full bg-clay-pot hover:bg-rust text-linen py-3 font-semibold rounded-full transition-all duration-300"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 font-semibold rounded-full transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    Send Message
+                    <MessageCircle className="w-5 h-5" />
+                    Send via WhatsApp
                   </Button>
                 </form>
               </Card>
@@ -382,7 +411,8 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 
